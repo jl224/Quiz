@@ -71,6 +71,21 @@ var secondsLeft = 90;
 
 generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
 
+
+//Create timer for quiz
+function setTime() {
+    var timerInterval = setInterval(function () {
+        secondsLeft--;
+        timeEl.textContent = secondsLeft + " seconds left";
+
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval);
+        }
+
+    }, 1000);
+}
+
+
 function generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton) {
 
     function showQuiz(myQuestions, quizContainer) {
@@ -107,10 +122,7 @@ function generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton
                 '<div class="questions">' + myQuestions[i].question + '</div>'
                 + '<div class="answers">' + answers.join('') + '</div>'
             );
-
-
         }
-
         // finally combine our output list into one string of html and put it on the page
         quizContainer.innerHTML = output.join('');
     }
@@ -146,37 +158,38 @@ function generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton
             else {
                 // color the answers red
                 answerContainers[i].setAttribute("style", "color:red");
-
             }
         }
 
+
+
         // show number of correct answers out of total
         resultsContainer.innerHTML = numCorrect + ' out of ' + myQuestions.length;
+
+        // function init() {
+        //     // Get stored todos from localStorage
+        //     // Parsing the JSON string to an object
+        //     var  = JSON.parse(localStorage.getItem("storage"));
+
+        //   function storeTodos() {
+        // Stringify and set "todos" key in localStorage to todos array
+        localStorage.setItem("highscores", JSON.stringify(numCorrect));
+        //   }
+
     }
 
-
-    function setTime() {
-        var timerInterval = setInterval(function () {
-            secondsLeft--;
-            timeEl.textContent = secondsLeft + " seconds left";
-
-            if (secondsLeft === 0) {
-                clearInterval(timerInterval);
-            }
-
-        }, 1000);
-    }
     // show questions once the click button is hit
 
     $("#start").on("click", function (el) {
         showQuiz(myQuestions, quizContainer);
+        setTime();
         $(this).css("display", "none")
         $("#submit").css("display", "block")
         console.log($(this).text());
     })
 
     $("#submit").on("click", function (ev) {
-        showResults(myQuestions, quizContainer, resultsContainer);
+        showResults(myQuestions, quizContainer, resultsContaine);
         $(this).css("display", "none")
         console.log($(this).text());
     })
