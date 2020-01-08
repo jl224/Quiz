@@ -64,6 +64,8 @@ var quizContainer = document.getElementById('quiz');
 var submitButton = document.getElementById('submit')
 var resultsContainer = document.getElementById('results');
 var startButton = document.getElementById('start');
+var timeEl = document.querySelector(".time");
+var secondsLeft = 90;
 
 
 
@@ -152,6 +154,18 @@ function generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton
         resultsContainer.innerHTML = numCorrect + ' out of ' + myQuestions.length;
     }
 
+
+    function setTime() {
+        var timerInterval = setInterval(function () {
+            secondsLeft--;
+            timeEl.textContent = secondsLeft + " seconds left";
+
+            if (secondsLeft === 0) {
+                clearInterval(timerInterval);
+            }
+
+        }, 1000);
+    }
     // show questions once the click button is hit
 
     $("#start").on("click", function (el) {
