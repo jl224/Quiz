@@ -1,7 +1,9 @@
 
-
-
+var numCorrect;
+var myscore;
+var timerInterval;
 var myQuestions = [
+
     {
         question: "#1. Which of the following is an advantage of using JavaScript?",
         answers: {
@@ -25,12 +27,10 @@ var myQuestions = [
     },
 
     {
-        question: "#3. Which of the following function of String object causes a string to be displayed in the specified color as if it were in a <font color='color'> tag?",
+        question: "#3. Java is the same language as Javascript?",
         answers: {
-            A: 'fixed()',
-            B: 'fontcolor()',
-            C: 'blink()',
-            D: 'bold()'
+            A: 'True',
+            B: 'False',
         },
         correctAnswer: 'B'
     },
@@ -74,7 +74,7 @@ generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
 
 //Create timer for quiz
 function setTime() {
-    var timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
         secondsLeft--;
         timeEl.textContent = secondsLeft + " seconds left";
 
@@ -89,7 +89,7 @@ function setTime() {
 function generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton) {
 
     function showQuiz(myQuestions, quizContainer) {
-        // we'll need a place to store the output and the answer choices
+        // a place to store the output and the answer choices
         var output = [];
         var answers;
 
@@ -123,7 +123,7 @@ function generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton
                 + '<div class="answers">' + answers.join('') + '</div>'
             );
         }
-        // finally combine our output list into one string of html and put it on the page
+        // finally combine the output list into one string of html and put it on the page
         quizContainer.innerHTML = output.join('');
     }
 
@@ -136,7 +136,7 @@ function generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton
 
         // keep track of user's answers
         var userAnswer = '';
-        var numCorrect = 0;
+        numCorrect = 0;
 
         // for each question...
         for (var i = 0; i < myQuestions.length; i++) {
@@ -164,20 +164,37 @@ function generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton
 
 
         // show number of correct answers out of total
-        resultsContainer.innerHTML = numCorrect + ' out of ' + myQuestions.length;
+        // myscore = secondsLeft - ((myQuestions.length - numCorrect) * 15)
+        resultsContainer.innerHTML = numCorrect + ' out of 5';
+        // + myQuestions.length + 'your score is: ' + secondsLeft + '';
 
-        // function init() {
-        //     // Get stored todos from localStorage
-        //     // Parsing the JSON string to an object
-        //     var  = JSON.parse(localStorage.getItem("storage"));
+
 
         //   function storeTodos() {
         // Stringify and set "todos" key in localStorage to todos array
-        localStorage.setItem("highscores", JSON.stringify(numCorrect));
-        //   }
+        $("#name").removeClass("hide")
+
+
 
     }
+    $("#store").on("click", function () {  //  key: value (always is a string) [{name:scores},{name:socres},{}]
+        // get the user name from the input
+        var name = $("#user").val()
+        // then update the storage
+        var scoresLocal = localStorage.getItem("highscores")
+        if (scoresLocal) {
+            scores = JSON.parse(scoresLocal)
+        } else {
+            scores = []
+        }
+        var newUser = {
+            name: name,
+            score: secondsLeft
+        }
+        scores.push(newUser)
+        localStorage.setItem("highscores", JSON.stringify(scores));
 
+    })
     // show questions once the click button is hit
 
     $("#start").on("click", function (el) {
@@ -189,10 +206,17 @@ function generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton
     })
 
     $("#submit").on("click", function (ev) {
-        showResults(myQuestions, quizContainer, resultsContaine);
+        clearInterval(timerInterval)
+        showResults(myQuestions, quizContainer, resultsContainer);
         $(this).css("display", "none")
         console.log($(this).text());
     })
+
+    // $("#savedScores").on("click", function (el) {
+    //     $(this).css("display", "none")
+    //     $("#submit").css("display", "block")
+    //     console.log($(this).text());
+    // })
 
 }
 

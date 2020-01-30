@@ -26,7 +26,9 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Style to fix the issue of text extending past card length -->
+
+
+    //Style to fix the issue of text extending past card length
     <style>
         .card-body a {
             word-break: break-all;
@@ -44,59 +46,24 @@
     <div class="jumbotron" style="background-color:navy ; color: white;">
         <h1 class="text-center">
             <strong>
-                <i class></i>Javascript Coding Quiz</strong>
+                <i class></i>Highest Scores</strong>
         </h1>
     </div>
 
-    <div class="card">
-        <div class="card-header">
-            <strong>
-                <i class></i>Quiz Instructions: </strong>The quiz consists of 5 questions and you have 90 seconds to
-            complete the quiz. Once the start button is
-            pushed,
-            the timer will initialize the countdown. For every question
-            answered incorrectly, 5 seconds will be deducted from the countdown. The timer stops when all questions
-            are answered and the "Submit Answers" button has been pushed. Once the answers are submitted, the score
-            will be displayed at the bottom of the page. Questions answered correctly will be highlighted in green.
-            Questions
-            answered incorrectly will be highlighted in red. Good luck!
-        </div>
+    <div id="finalScore">
 
-
-
-        <h1 class="time"></h1>
         <div class="card-body">
 
-            <div id="quiz"></div>
-            <br>
 
-
-            <div class="card-body">
-                <button id="start">Start Quiz</button>
-                <br>
-
-                <button id="submit">Submit Answers</button>
-
-                <a href="index2.html"><button id="savedScores">Go to Highest Scores</button></a>
-
-            </div>
-
-            <div id="results"></div>
-
-            <div id="name" class="hide">
-                <p> Enter name:</p>
-                <input type="text" id="user" />
-                <button id="store">SAVE SCORE</button>
-            </div>
-            <br>
+            <a href="index.html"><button id="Home">Go to Home Page</button></a>
 
         </div>
+
     </div>
 
 
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="script.js"></script>
-
+    <script src="script2.js"></script>
 
 
 </body>
